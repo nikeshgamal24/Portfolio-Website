@@ -1,0 +1,44 @@
+[
+  {
+    "slug": "watch-wise",
+    "title": "Watch Wise",
+    "summary": "AI-powered, social movie-night assistant.",
+    "description": "A web application that helps groups decide on movies using AI recommendations and social voting.",
+    "tech": ["React", "Node.js", "PostgreSQL", "Redis", "OpenAI API"],
+    "code": "https://github.com/yourname/watch-wise",
+    "live": "https://watchwise.vercel.app",
+    "image": "/images/watchwise.png",
+    "tags": ["ai", "recsys", "realtime", "social"],
+    "stars": 15,
+    "updated": "2024-01-15T10:00:00Z",
+    "language": "JavaScript"
+  },
+  {
+    "slug": "portfolio-website",
+    "title": "Portfolio Website",
+    "summary": "Minimalist, high-performance personal portfolio.",
+    "description": "A modern portfolio website built with React, Vite, and Tailwind CSS featuring smooth animations and responsive design.",
+    "tech": ["React", "Vite", "Tailwind CSS", "Framer Motion"],
+    "code": "https://github.com/yourname/portfolio-website",
+    "live": "https://yourname.vercel.app",
+    "image": "/images/portfolio.png",
+    "tags": ["portfolio", "react", "vite", "tailwind"],
+    "stars": 8,
+    "updated": "2024-01-20T14:30:00Z",
+    "language": "JavaScript"
+  },
+  {
+    "slug": "task-manager",
+    "title": "Task Manager Pro",
+    "summary": "Collaborative project management tool.",
+    "description": "A full-stack task management application with real-time updates, team collaboration, and progress tracking.",
+    "tech": ["React", "Node.js", "MongoDB", "Socket.io", "JWT"],
+    "code": "https://github.com/yourname/task-manager",
+    "live": "https://taskmanager.vercel.app",
+    "image": "/images/taskmanager.png",
+    "tags": ["productivity", "collaboration", "real-time", "fullstack"],
+    "stars": 23,
+    "updated": "2024-01-10T09:15:00Z",
+    "language": "JavaScript"
+  }
+]
