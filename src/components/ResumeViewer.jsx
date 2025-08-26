@@ -39,375 +39,73 @@ const ResumeViewer = ({ isOpen, onClose }) => {
   const handleZoomOut = () => setZoom(prev => Math.max(prev - 0.1, 0.5));
   const handleReset = () => setZoom(1);
   
-  const handleDownload = () => {
-    // Create a new window with the resume content for printing/PDF generation
-    const resumeContent = `
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <title>Your Name - Full Stack Software Engineer</title>
-          <style>
-            @media print {
-              body { margin: 0; }
-              .resume { margin: 0; }
-            }
-            body {
-              font-family: Arial, sans-serif;
-              margin: 0;
-              padding: 20px;
-              background: white;
-              color: black;
-            }
-            .resume {
-              max-width: 800px;
-              margin: 0 auto;
-              background: white;
-              color: black;
-              line-height: 1.6;
-            }
-            .header {
-              text-align: center;
-              border-bottom: 2px solid black;
-              padding-bottom: 20px;
-              margin-bottom: 30px;
-            }
-            .name {
-              font-size: 36px;
-              font-weight: bold;
-              margin-bottom: 10px;
-              color: black;
-            }
-            .title {
-              font-size: 20px;
-              margin-bottom: 15px;
-              color: black;
-            }
-            .contact {
-              font-size: 14px;
-              margin-bottom: 10px;
-              color: black;
-            }
-            .section {
-              margin-bottom: 25px;
-            }
-            .section-title {
-              font-size: 18px;
-              font-weight: bold;
-              border-bottom: 1px solid black;
-              padding-bottom: 5px;
-              margin-bottom: 15px;
-              color: black;
-              text-transform: uppercase;
-            }
-            .job-title {
-              font-weight: bold;
-              font-size: 16px;
-              color: black;
-            }
-            .company {
-              font-weight: bold;
-              color: black;
-            }
-            .date {
-              color: black;
-            }
-            .skills-grid {
-              display: grid;
-              grid-template-columns: 1fr 1fr;
-              gap: 20px;
-            }
-            .skill-category {
-              margin-bottom: 15px;
-            }
-            .skill-title {
-              font-weight: bold;
-              margin-bottom: 5px;
-              color: black;
-            }
-            .skill-list {
-              color: black;
-            }
-            ul {
-              margin: 10px 0;
-              padding-left: 20px;
-            }
-            li {
-              margin-bottom: 5px;
-              color: black;
-            }
-            .project {
-              margin-bottom: 20px;
-            }
-            .project-title {
-              font-weight: bold;
-              font-size: 16px;
-              color: black;
-            }
-            .project-tech {
-              font-weight: bold;
-              margin: 5px 0;
-              color: black;
-            }
-            .project-desc {
-              margin: 10px 0;
-              color: black;
-            }
-            .education-item {
-              display: flex;
-              justify-content: space-between;
-              margin-bottom: 15px;
-            }
-            .education-left h3 {
-              font-weight: bold;
-              margin-bottom: 5px;
-              color: black;
-            }
-            .education-left p {
-              color: black;
-            }
-            .education-right {
-              color: black;
-            }
-            .certification-item {
-              display: flex;
-              justify-content: space-between;
-              margin-bottom: 10px;
-            }
-            .certification-left h3 {
-              font-weight: bold;
-              color: black;
-            }
-            .certification-left p {
-              color: black;
-            }
-            .certification-right {
-              color: black;
-            }
-            @media print {
-              .no-print { display: none; }
-            }
-          </style>
-        </head>
-        <body>
-          <div class="resume">
-            <div class="header">
-              <div class="name">YOUR NAME</div>
-              <div class="title">Full Stack Software Engineer</div>
-              <div class="contact">San Francisco, CA | your.email@example.com | +1 (555) 123-4567</div>
-              <div class="contact">LinkedIn: linkedin.com/in/yourprofile | GitHub: github.com/yourusername</div>
-            </div>
+  const handleDownload = async () => {
+    try {
+      // Show loading state
+      const downloadBtn = document.getElementById('downloadBtn');
+      if (downloadBtn) {
+        downloadBtn.textContent = 'Generating PDF...';
+        downloadBtn.disabled = true;
+      }
 
-            <div class="section">
-              <div class="section-title">Professional Summary</div>
-              <p>Results-driven Full Stack Software Engineer with 4+ years of experience in developing scalable web applications, 
-              RESTful APIs, and cloud-native solutions. Proficient in JavaScript, React, Node.js, Python, and AWS. 
-              Demonstrated expertise in Agile methodologies, CI/CD pipelines, and database optimization. 
-              Strong problem-solving skills with a track record of delivering high-quality software solutions 
-              that improve user experience and business performance.</p>
-            </div>
+      // Get the resume content element
+      const resumeElement = containerRef.current;
+      if (!resumeElement) {
+        throw new Error('Resume element not found');
+      }
 
-            <div class="section">
-              <div class="section-title">Core Competencies</div>
-              <div class="skills-grid">
-                <div class="skill-category">
-                  <div class="skill-title">Programming Languages:</div>
-                  <div class="skill-list">JavaScript (ES6+), TypeScript, Python, Java, C++, SQL</div>
-                </div>
-                <div class="skill-category">
-                  <div class="skill-title">Frontend Technologies:</div>
-                  <div class="skill-list">React.js, Redux, Next.js, HTML5, CSS3, Tailwind CSS, Bootstrap</div>
-                </div>
-                <div class="skill-category">
-                  <div class="skill-title">Backend Technologies:</div>
-                  <div class="skill-list">Node.js, Express.js, Django, REST APIs, GraphQL, Microservices</div>
-                </div>
-                <div class="skill-category">
-                  <div class="skill-title">Databases & Cloud:</div>
-                  <div class="skill-list">MongoDB, PostgreSQL, MySQL, Redis, AWS, Docker, Kubernetes</div>
-                </div>
-              </div>
-            </div>
+      // Convert HTML to canvas
+      const canvas = await html2canvas(resumeElement, {
+        scale: 2, // Higher quality
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: '#ffffff',
+        width: 800,
+        height: resumeElement.scrollHeight
+      });
 
-            <div class="section">
-              <div class="section-title">Professional Experience</div>
-              
-              <div class="project">
-                <div class="job-title">Senior Full Stack Software Engineer</div>
-                <div class="company">TechCorp Inc., San Francisco, CA</div>
-                <div class="date">January 2022 - Present</div>
-                <ul>
-                  <li>Developed and maintained 5+ full-stack web applications using React.js, Node.js, and MongoDB, serving over 100,000 active users</li>
-                  <li>Implemented RESTful APIs and microservices architecture, improving system performance by 40% and reducing API response time by 60%</li>
-                  <li>Designed and optimized database schemas, implemented MongoDB indexing strategies, and integrated Redis caching, resulting in 50% faster query performance</li>
-                  <li>Established CI/CD pipelines using Jenkins and GitHub Actions, reducing deployment time from 2 hours to 15 minutes</li>
-                  <li>Led code reviews and mentored 3 junior developers, improving team code quality and reducing bug reports by 30%</li>
-                  <li>Collaborated with product managers and UX designers to implement user-centered solutions, increasing user satisfaction scores by 25%</li>
-                </ul>
-              </div>
+      // Create PDF
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      
+      const imgWidth = 210; // A4 width in mm
+      const pageHeight = 295; // A4 height in mm
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      let heightLeft = imgHeight;
+      let position = 0;
 
-              <div class="project">
-                <div class="job-title">Full Stack Software Engineer</div>
-                <div class="company">StartupXYZ, San Francisco, CA</div>
-                <div class="date">June 2020 - December 2021</div>
-                <ul>
-                  <li>Built MVP applications from concept to deployment using React.js, Node.js, and PostgreSQL, contributing to 200% user growth</li>
-                  <li>Implemented responsive design principles and cross-browser compatibility, achieving 99.9% uptime across all platforms</li>
-                  <li>Developed RESTful APIs and integrated third-party services including Stripe for payment processing and SendGrid for email automation</li>
-                  <li>Participated in Agile development cycles, delivering features 2 weeks ahead of schedule on average</li>
-                  <li>Optimized database queries and implemented caching strategies, improving application load time by 45%</li>
-                </ul>
-              </div>
-            </div>
+      // Add first page
+      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
 
-            <div class="section">
-              <div class="section-title">Technical Projects</div>
-              
-              <div class="project">
-                <div class="project-title">E-Commerce Management System</div>
-                <div class="project-tech">Technologies: React.js, Node.js, Express.js, MongoDB, Redis, RTK Query, Tailwind CSS, AWS, Docker</div>
-                <div class="project-desc">Full-stack e-commerce platform with role-based access control, inventory management, and analytics dashboard</div>
-                <ul>
-                  <li>Implemented user authentication and authorization using JWT tokens and role-based access control (RBAC)</li>
-                  <li>Designed scalable database architecture with MongoDB, implemented data validation and error handling</li>
-                  <li>Integrated Redis caching layer, reducing database load by 40% and improving response times</li>
-                  <li>Built responsive admin dashboard with real-time analytics, inventory tracking, and order management</li>
-                  <li>Implemented QR code generation for product tracking and integrated thermal receipt printing using WebUSB API</li>
-                </ul>
-              </div>
+      // Add additional pages if needed
+      while (heightLeft >= 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+      }
 
-              <div class="project">
-                <div class="project-title">Project Phoenix - College Management Platform</div>
-                <div class="project-tech">Technologies: React.js, Node.js, Express.js, MongoDB, RTK Query, Tailwind CSS, AWS, Docker</div>
-                <div class="project-desc">Award-winning centralized project management platform streamlining student project lifecycle from submission to evaluation</div>
-                <ul>
-                  <li>Developed intelligent supervisor assignment system using Cosine Similarity algorithms and machine learning</li>
-                  <li>Implemented automated result generation, progress tracking, and deadline management features</li>
-                  <li>Built comprehensive project management tools including extension requests, milestone tracking, and collaboration features</li>
-                  <li>Integrated real-time notifications, file upload/download, and version control for project documents</li>
-                  <li>Achieved 95% user satisfaction and reduced administrative overhead by 70%</li>
-                </ul>
-              </div>
-            </div>
+      // Download the PDF
+      pdf.save('YourName_Resume.pdf');
 
-            <div class="section">
-              <div class="section-title">Education</div>
-              <div class="education-item">
-                <div class="education-left">
-                  <h3>Master of Science in Software Engineering</h3>
-                  <p>Tech Institute, San Francisco, CA</p>
-                  <p>GPA: 3.8/4.0 | Relevant Coursework: Advanced Algorithms, Software Architecture, Database Systems</p>
-                </div>
-                <div class="education-right">2022 - 2024</div>
-              </div>
-              <div class="education-item">
-                <div class="education-left">
-                  <h3>Bachelor of Science in Computer Science</h3>
-                  <p>University of Technology, San Francisco, CA</p>
-                  <p>GPA: 3.7/4.0 | Relevant Coursework: Data Structures, Object-Oriented Programming, Web Development</p>
-                </div>
-                <div class="education-right">2018 - 2022</div>
-              </div>
-            </div>
+      // Reset button state
+      if (downloadBtn) {
+        downloadBtn.textContent = 'Download PDF';
+        downloadBtn.disabled = false;
+      }
 
-            <div class="section">
-              <div class="section-title">Certifications</div>
-              <div class="certification-item">
-                <div class="certification-left">
-                  <h3>AWS Certified Developer Associate</h3>
-                  <p>Amazon Web Services</p>
-                </div>
-                <div class="certification-right">2023</div>
-              </div>
-              <div class="certification-item">
-                <div class="certification-left">
-                  <h3>Google Cloud Professional Cloud Developer</h3>
-                  <p>Google Cloud Platform</p>
-                </div>
-                <div class="certification-right">2022</div>
-              </div>
-              <div class="certification-item">
-                <div class="certification-left">
-                  <h3>MongoDB Certified Developer</h3>
-                  <p>MongoDB University</p>
-                </div>
-                <div class="certification-right">2023</div>
-              </div>
-            </div>
-
-            <div class="section">
-              <div class="section-title">Technical Skills</div>
-              <div class="skills-grid">
-                <div class="skill-category">
-                  <div class="skill-title">Programming Languages:</div>
-                  <div class="skill-list">JavaScript (ES6+), TypeScript, Python, Java, C++, SQL, HTML5, CSS3</div>
-                </div>
-                <div class="skill-category">
-                  <div class="skill-title">Frontend Development:</div>
-                  <div class="skill-list">React.js, Redux, Next.js, Vue.js, Angular, Bootstrap, Tailwind CSS, Sass, Webpack, Babel</div>
-                </div>
-                <div class="skill-category">
-                  <div class="skill-title">Backend Development:</div>
-                  <div class="skill-list">Node.js, Express.js, Django, Flask, REST APIs, GraphQL, Microservices, Serverless Architecture</div>
-                </div>
-                <div class="skill-category">
-                  <div class="skill-title">Databases & ORMs:</div>
-                  <div class="skill-list">MongoDB, PostgreSQL, MySQL, Redis, Mongoose, Sequelize, Prisma, Database Design, Data Modeling</div>
-                </div>
-                <div class="skill-category">
-                  <div class="skill-title">DevOps & Cloud:</div>
-                  <div class="skill-list">AWS, Docker, Kubernetes, CI/CD, Jenkins, GitHub Actions, Git, Linux, Nginx, Load Balancing</div>
-                </div>
-                <div class="skill-category">
-                  <div class="skill-title">Testing & Quality:</div>
-                  <div class="skill-list">Jest, Mocha, Chai, Cypress, Selenium, Unit Testing, Integration Testing, E2E Testing, Code Coverage</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="section">
-              <div class="section-title">Additional Skills</div>
-              <div class="skills-grid">
-                <div class="skill-category">
-                  <div class="skill-title">Methodologies:</div>
-                  <div class="skill-list">Agile, Scrum, Kanban, Test-Driven Development (TDD), Behavior-Driven Development (BDD)</div>
-                </div>
-                <div class="skill-category">
-                  <div class="skill-title">Soft Skills:</div>
-                  <div class="skill-list">Leadership, Team Management, Problem Solving, Communication, Mentoring, Code Reviews</div>
-                </div>
-                <div class="skill-category">
-                  <div class="skill-title">Tools & Platforms:</div>
-                  <div class="skill-list">VS Code, Postman, Jira, Confluence, Slack, Zoom, Microsoft Office Suite</div>
-                </div>
-                <div class="skill-category">
-                  <div class="skill-title">Languages:</div>
-                  <div class="skill-list">English (Native), Spanish (Professional Working Proficiency)</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="section">
-              <div class="section-title">References</div>
-              <p>Available upon request. Professional references from previous employers and colleagues 
-              can speak to technical abilities, work ethic, and collaborative skills.</p>
-            </div>
-          </div>
-          
-          <div class="no-print" style="text-align: center; margin-top: 30px; padding: 20px; border-top: 1px solid #ccc;">
-            <button onclick="window.print()" style="padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">
-              Print / Save as PDF
-            </button>
-            <p style="margin-top: 10px; color: #666; font-size: 14px;">
-              Click the button above to print or save as PDF. Use "Save as PDF" in your browser's print dialog for best results.
-            </p>
-          </div>
-        </body>
-      </html>
-    `;
-
-    const newWindow = window.open('', '_blank');
-    newWindow.document.write(resumeContent);
-    newWindow.document.close();
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      alert('Error generating PDF. Please try again.');
+      
+      // Reset button state on error
+      const downloadBtn = document.getElementById('downloadBtn');
+      if (downloadBtn) {
+        downloadBtn.textContent = 'Download PDF';
+        downloadBtn.disabled = false;
+      }
+    }
   };
 
   if (!isOpen) return null;
@@ -463,6 +161,7 @@ const ResumeViewer = ({ isOpen, onClose }) => {
               <button
                 onClick={handleDownload}
                 className="px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg flex items-center space-x-2 transition-colors"
+                id="downloadBtn"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />

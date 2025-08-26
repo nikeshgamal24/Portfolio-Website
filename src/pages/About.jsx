@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { siteConfig } from '@/config/site';
 import Badge from '@/components/Badge';
@@ -24,6 +24,30 @@ const About = () => {
       transition: {
         duration: 0.5,
         ease: "easeOut"
+      }
+    }
+  };
+
+  // Scroll animation variants
+  const scrollVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const staggerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2
       }
     }
   };

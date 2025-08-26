@@ -39,35 +39,30 @@ const SkillsOverlay = ({ isOpen, onClose }) => {
       skills: [
         { 
           name: 'React', 
-          level: 'Expert',
           description: 'Building modern, scalable React applications with hooks and context',
           tags: ['Hooks', 'Context', 'Redux', 'Next.js'],
           color: 'from-blue-500 to-cyan-500'
         },
         { 
           name: 'JavaScript', 
-          level: 'Expert',
           description: 'ES6+ features, async programming, and modern JavaScript patterns',
           tags: ['ES6+', 'Async/Await', 'Promises', 'Modules'],
           color: 'from-yellow-500 to-orange-500'
         },
         { 
           name: 'Tailwind CSS', 
-          level: 'Advanced',
           description: 'Utility-first CSS framework for rapid UI development',
           tags: ['Responsive', 'Custom CSS', 'Dark Mode', 'Animations'],
           color: 'from-cyan-500 to-blue-500'
         },
         { 
           name: 'HTML/CSS', 
-          level: 'Expert',
           description: 'Semantic HTML and modern CSS with animations and layouts',
           tags: ['Semantic', 'Flexbox', 'Grid', 'Animations'],
           color: 'from-orange-500 to-red-500'
         },
         { 
           name: 'Framer Motion', 
-          level: 'Advanced',
           description: 'Creating smooth animations and micro-interactions',
           tags: ['Animations', 'Transitions', 'Gestures', 'Variants'],
           color: 'from-purple-500 to-pink-500'
@@ -247,10 +242,7 @@ const SkillsOverlay = ({ isOpen, onClose }) => {
 
           {/* Skills Content */}
           <div className="p-6 overflow-y-auto max-h-[60vh]">
-            {/* Debug info - remove this later */}
-            <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-sm text-blue-800 dark:text-blue-200">
-              <strong>Debug:</strong> Selected Category: {selectedCategory} | Skills Count: {skillCategories[selectedCategory]?.skills?.length || 0}
-            </div>
+
             
             <motion.div
               key={selectedCategory}
@@ -274,14 +266,11 @@ const SkillsOverlay = ({ isOpen, onClose }) => {
                       {skill.icon}
                     </div>
                     
-                    {/* Skill name and level */}
+                    {/* Skill name */}
                     <div className="mb-3">
                       <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                         {skill.name}
                       </h3>
-                      <div className="inline-flex items-center px-3 py-1 bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-900/20 dark:to-emerald-900/20 text-green-800 dark:text-green-200 rounded-full text-sm font-medium">
-                        {skill.level}
-                      </div>
                     </div>
                     
                     {/* Description */}

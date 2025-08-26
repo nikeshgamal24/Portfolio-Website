@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { motion, useInView } from 'framer-motion';
+import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { siteConfig } from '@/config/site';
 import SkillsOverlay from '@/components/SkillsOverlay';
@@ -29,6 +29,30 @@ const Home = () => {
       transition: {
         duration: 0.5,
         ease: "easeOut"
+      }
+    }
+  };
+
+  // Scroll animation variants
+  const scrollVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const staggerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2
       }
     }
   };
@@ -669,12 +693,21 @@ const Home = () => {
         <div className="max-w-4xl mx-auto">
           <motion.h2
             className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12"
-            variants={itemVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={scrollVariants}
           >
             What I'm up to now
           </motion.h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerVariants}
+          >
             {nowItems.map((item, index) => (
               <motion.div
                 key={index}
@@ -709,7 +742,7 @@ const Home = () => {
                 <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -718,14 +751,20 @@ const Home = () => {
         <div className="max-w-4xl mx-auto text-center">
           <motion.h2
             className="text-3xl font-bold text-gray-900 dark:text-white mb-12"
-            variants={itemVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={scrollVariants}
           >
             Let's connect
           </motion.h2>
           
           <motion.div
             className="flex justify-center space-x-8"
-            variants={itemVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerVariants}
           >
             {quickLinks.map((link, index) => (
               <motion.a
@@ -963,55 +1002,61 @@ const Home = () => {
           </motion.div>
 
           {/* Skills Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerVariants}
+          >
             {[
               {
                 name: "React & Next.js",
-                level: "Expert",
                 icon: "⚛️",
                 color: "from-blue-500 to-cyan-600",
                 description: "Building modern, scalable React applications with Next.js for optimal performance",
-                tags: ["Hooks", "Context", "SSR", "SSG"]
+                tags: ["Hooks", "Context", "SSR", "SSG"],
+                experience: "4+ years"
               },
               {
                 name: "Node.js & Express",
-                level: "Advanced",
                 icon: "🟢",
                 color: "from-green-500 to-emerald-600",
                 description: "Developing robust backend APIs and server-side applications",
-                tags: ["REST APIs", "Middleware", "Authentication", "Database"]
+                tags: ["REST APIs", "Middleware", "Authentication", "Database"],
+                experience: "3+ years"
               },
               {
                 name: "TypeScript",
-                level: "Advanced",
                 icon: "🔷",
                 color: "from-blue-600 to-indigo-600",
                 description: "Writing type-safe, maintainable code with enhanced developer experience",
-                tags: ["Types", "Interfaces", "Generics", "Utility Types"]
+                tags: ["Types", "Interfaces", "Generics", "Utility Types"],
+                experience: "2+ years"
               },
               {
                 name: "Tailwind CSS",
-                level: "Expert",
                 icon: "🎨",
                 color: "from-cyan-500 to-blue-600",
                 description: "Creating beautiful, responsive designs with utility-first CSS framework",
-                tags: ["Responsive", "Custom CSS", "Animations", "Dark Mode"]
+                tags: ["Responsive", "Custom CSS", "Animations", "Dark Mode"],
+                experience: "3+ years"
               },
               {
                 name: "PostgreSQL & MongoDB",
-                level: "Intermediate",
                 icon: "🗄️",
                 color: "from-purple-500 to-pink-600",
                 description: "Designing and managing both relational and NoSQL databases",
-                tags: ["SQL", "NoSQL", "Indexing", "Performance"]
+                tags: ["SQL", "NoSQL", "Indexing", "Performance"],
+                experience: "3+ years"
               },
               {
                 name: "Docker & AWS",
-                level: "Intermediate",
                 icon: "🐳",
                 color: "from-blue-500 to-purple-600",
                 description: "Containerizing applications and deploying to cloud infrastructure",
-                tags: ["Containers", "CI/CD", "Cloud", "DevOps"]
+                tags: ["Containers", "CI/CD", "Cloud", "DevOps"],
+                experience: "2+ years"
               }
             ].map((skill, index) => (
               <motion.div
@@ -1023,45 +1068,52 @@ const Home = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 whileHover={{ y: -8, scale: 1.02 }}
               >
-                <div className="p-6 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-200/50 dark:border-gray-600/50 h-full relative overflow-hidden">
-                  {/* Skill icon */}
-                  <div className={`w-16 h-16 bg-gradient-to-br ${skill.color} rounded-xl flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                <div className="p-6 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-2xl shadow-xl border border-white/20 dark:border-gray-600/50 h-full relative overflow-hidden group">
+                  {/* Animated background gradient */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${skill.color} opacity-0 group-hover:opacity-10 transition-all duration-500 rounded-2xl`} />
+                  
+                  {/* Skill icon with enhanced styling */}
+                  <div className={`w-20 h-20 bg-gradient-to-br ${skill.color} rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-all duration-300 shadow-lg group-hover:shadow-2xl relative z-10`}>
                     {skill.icon}
                   </div>
                   
-                  {/* Skill name and level */}
-                  <div className="mb-3">
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                  {/* Skill name with experience */}
+                  <div className="mb-4 relative z-10">
+                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-gray-900 group-hover:to-gray-600 dark:group-hover:from-white dark:group-hover:to-gray-300 transition-all duration-300">
                       {skill.name}
                     </h3>
-                    <div className="inline-flex items-center px-3 py-1 bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-900/20 dark:to-emerald-900/20 text-green-800 dark:text-green-200 rounded-full text-sm font-medium">
-                      {skill.level}
+                    <div className="inline-flex items-center px-3 py-1 bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-800 dark:text-blue-200 rounded-full text-sm font-medium border border-blue-200 dark:border-blue-700">
+                      {skill.experience}
                     </div>
                   </div>
                   
-                  {/* Description */}
-                  <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+                  {/* Description with enhanced typography */}
+                  <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed text-sm relative z-10 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors duration-300">
                     {skill.description}
                   </p>
                   
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2">
+                  {/* Enhanced tags with hover effects */}
+                  <div className="flex flex-wrap gap-2 relative z-10">
                     {skill.tags.map((tag, tagIndex) => (
-                      <span
+                      <motion.span
                         key={tagIndex}
-                        className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded-lg text-xs font-medium"
+                        className="px-3 py-1.5 bg-white/80 dark:bg-gray-700/80 text-gray-700 dark:text-gray-300 rounded-xl text-xs font-medium border border-gray-200/50 dark:border-gray-600/50 backdrop-blur-sm group-hover:bg-white/90 dark:group-hover:bg-gray-700/90 transition-all duration-300 cursor-default"
+                        whileHover={{ scale: 1.05, y: -2 }}
+                        transition={{ duration: 0.2 }}
                       >
                         {tag}
-                      </span>
+                      </motion.span>
                     ))}
                   </div>
                   
-                  {/* Hover effect */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${skill.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-2xl`} />
+                  {/* Floating particles effect */}
+                  <div className="absolute top-4 right-4 w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100 animate-pulse" />
+                  <div className="absolute bottom-6 right-6 w-1.5 h-1.5 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 delay-200 animate-pulse" />
+                  <div className="absolute top-1/2 left-2 w-1 h-1 bg-gradient-to-r from-orange-400 to-red-400 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 delay-300 animate-pulse" />
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           {/* Additional Skills Showcase */}
           <motion.div

@@ -62,9 +62,9 @@ export const getUniqueTags = (projects) => {
 // Theme management
 export const getTheme = () => {
   if (typeof window !== 'undefined') {
-    return localStorage.getItem('theme') || 'light';
+    return localStorage.getItem('theme') || 'dark';
   }
-  return 'light';
+  return 'dark';
 };
 
 export const setTheme = (theme) => {
