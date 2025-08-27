@@ -90,12 +90,12 @@ const NotFound = () => {
           >
             <p className="text-sm">
               If you believe this is an error, please{' '}
-              <a
-                href="/contact"
+              <Link
+                to="/contact"
                 className="text-blue-600 dark:text-blue-400 hover:underline"
               >
                 let me know
-              </a>
+              </Link>
               .
             </p>
           </motion.div>

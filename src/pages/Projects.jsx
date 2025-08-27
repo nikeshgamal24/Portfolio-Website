@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
 import { siteConfig } from '@/config/site';
 import { fetchRepos } from '@/lib/github';
 import ProjectGrid from '@/components/ProjectGrid';
@@ -178,14 +179,17 @@ const Projects = () => {
               I'm always interested in hearing about new projects and opportunities. 
               Let's discuss how we can work together to bring your ideas to life.
             </p>
-            <motion.a
-              href="/contact"
-              className="btn-primary text-lg px-8 py-3 inline-block"
+            <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Get in Touch
-            </motion.a>
+              <Link
+                to="/contact"
+                className="btn-primary text-lg px-8 py-3 inline-block"
+              >
+                Get in Touch
+              </Link>
+            </motion.div>
           </motion.div>
         </div>
       </motion.div>

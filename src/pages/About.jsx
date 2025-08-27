@@ -1,5 +1,6 @@
 import { motion, useInView } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
 import { siteConfig } from '@/config/site';
 import Badge from '@/components/Badge';
 import Timeline from '@/components/Timeline';
@@ -611,14 +612,17 @@ const About = () => {
               I'm always open to discussing new opportunities, interesting projects, 
               or just having a chat about technology and development.
             </p>
-            <motion.a
-              href="/contact"
-              className="btn-primary text-lg px-8 py-3 inline-block"
+            <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Get in Touch
-            </motion.a>
+              <Link
+                to="/contact"
+                className="btn-primary text-lg px-8 py-3 inline-block"
+              >
+                Get in Touch
+              </Link>
+            </motion.div>
           </motion.section>
         </div>
       </motion.div>
