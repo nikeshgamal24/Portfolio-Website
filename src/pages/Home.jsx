@@ -59,18 +59,18 @@ const Home = () => {
 
   const nowItems = [
     {
-      text: "Building a new AI-powered recommendation system",
-      icon: "🤖",
+      text: "Learning Machine Learning & completed ML section, now studying LLM/NLP from scratch since March 2025",
+      icon: "🧠",
       color: "from-blue-500 to-purple-600"
     },
     {
-      text: "Learning advanced React patterns and performance optimization",
-      icon: "⚡",
+      text: "Exploring AI tools like Cursor.ai, ChatGPT-5, and building projects on GitHub",
+      icon: "🤖",
       color: "from-green-500 to-blue-600"
     },
     {
-      text: "Contributing to open-source projects in the React ecosystem",
-      icon: "🌟",
+      text: "Studying LLM fundamentals through YouTube and Udemy courses to master AI/ML technologies",
+      icon: "📚",
       color: "from-purple-500 to-pink-600"
     }
   ];
@@ -116,7 +116,7 @@ const Home = () => {
       {/* Hero Section - Two Column Layout */}
       <section className="pt-32 pb-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
             {/* Left Column - Hero Content */}
             <motion.div className="space-y-8" variants={itemVariants}>
               {/* Welcome Message */}
@@ -224,59 +224,35 @@ const Home = () => {
                 </motion.button>
               </motion.div>
 
-              {/* Social & Skills Section */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4">
-                {/* Social Links */}
-                <div className="space-y-3">
-                  <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide">
-                    Find with me
-                  </h3>
-                  <div className="flex space-x-4">
-                    {quickLinks.map((link, index) => (
-                      <motion.a
-                        key={link.name}
-                        href={link.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-3 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-xl transition-all duration-200"
-                        whileHover={{ scale: 1.1, y: -2 }}
-                        whileTap={{ scale: 0.9 }}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.6 + index * 0.1 }}
-                      >
-                        {getIcon(link.icon)}
-                      </motion.a>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Best Skills */}
-                <div className="space-y-3">
-                  <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide">
-                    Best skills on
-                  </h3>
-                  <div className="flex space-x-3">
-                    {['React', 'Node.js', 'Tailwind'].map((skill, index) => (
-                      <motion.div
-                        key={skill}
-                        className="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg text-sm font-medium"
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.8 + index * 0.1 }}
-                        whileHover={{ scale: 1.05 }}
-                      >
-                        {skill}
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
+                          {/* Social Links Section */}
+            <div className="space-y-3 pt-8">
+              <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide">
+                Find with me
+              </h3>
+              <div className="flex space-x-4">
+                {quickLinks.map((link, index) => (
+                  <motion.a
+                    key={link.name}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-3 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-xl transition-all duration-200"
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    whileTap={{ scale: 0.9 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.6 + index * 0.1 }}
+                  >
+                    {getIcon(link.icon)}
+                  </motion.a>
+                ))}
               </div>
+            </div>
             </motion.div>
 
             {/* Right Column - Profile & Stats */}
             <motion.div
-              className="relative"
+              className="relative lg:ml-8"
               variants={itemVariants}
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
@@ -298,8 +274,18 @@ const Home = () => {
                     }}
                   >
                     <div className="w-full h-full bg-gray-200 dark:bg-gray-700 rounded-3xl flex items-center justify-center overflow-hidden">
-                      {/* Placeholder for profile image */}
-                      <div className="text-center">
+                      {/* Profile Image */}
+                      <img
+                        src="https://scontent.fktm23-1.fna.fbcdn.net/v/t39.30808-6/480892137_2631828610342618_7123222790012128433_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHDWQGY7ImHSg_HmWWoXm-TmBeHEr57RMaYF4cSvntExktfxqGXe6cCGjnf-IEl4X2H7iln-LoKW7PzIUheX1lS&_nc_ohc=E6QspX5BaFQQ7kNvwGskZHY&_nc_oc=AdmhEXMVdp-nH1igdouDzrgmb4QlBxmPVH8YLJpmff45hn54kH1wo9JMnUPDY3D0EXBXiJBc6yGTBm5Q85pSbn8h&_nc_zt=23&_nc_ht=scontent.fktm23-1.fna&_nc_gid=oa7_GH2YN3_G31w0H1H3Cw&oh=00_AfU_7lm5Pi5I52NAOyLjIEsgWugkBfQ1GWEJ6c-trltjyw&oe=68B50760"
+                        alt="Nikesh Gamal - Software Engineer"
+                        className="w-full h-full object-cover rounded-3xl"
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                          e.target.nextSibling.style.display = 'flex';
+                        }}
+                      />
+                      {/* Fallback placeholder */}
+                      <div className="text-center hidden">
                         <motion.div
                           className="text-8xl mb-4"
                           animate={{ 
@@ -353,31 +339,27 @@ const Home = () => {
                 </div>
               </div>
 
-              {/* Stats Cards */}
-              <div className="grid grid-cols-3 gap-4 mt-8">
-                {[
-                  { number: '50+', label: 'Projects', icon: '💼' },
-                  { number: '3+', label: 'Years', icon: '⏰' },
-                  { number: '100%', label: 'Satisfaction', icon: '😊' }
-                ].map((stat, index) => (
-                  <motion.div
-                    key={stat.label}
-                    className="text-center p-4 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl border border-gray-200/50 dark:border-gray-600/50"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1 + index * 0.1 }}
-                    whileHover={{ y: -5, scale: 1.02 }}
-                  >
-                    <div className="text-2xl mb-2">{stat.icon}</div>
-                    <div className="text-2xl font-bold text-gray-900 dark:text-white">
-                      {stat.number}
-                    </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">
-                      {stat.label}
-                    </div>
-                  </motion.div>
-                ))}
+              {/* Best Skills Section - Below Profile Photo */}
+              <div className="mt-8 space-y-3">
+                <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide">
+                  Best skills on
+                </h3>
+                <div className="flex flex-wrap gap-3 w-full">
+                  {['Node.js', 'Express.js', 'Python','Javascript','MongoDB','MSSQL','PostgreSQL','Postman','React','CSS','Docker'].map((skill, index) => (
+                    <motion.div
+                      key={skill}
+                      className="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg text-sm font-medium shadow-lg whitespace-nowrap"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.8 + index * 0.1 }}
+                      whileHover={{ scale: 1.05, y: -2 }}
+                    >
+                      {skill}
+                    </motion.div>
+                  ))}
+                </div>
               </div>
+              
             </motion.div>
           </div>
         </div>
@@ -398,10 +380,10 @@ const Home = () => {
               Featured Project
             </div>
             <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-6">
-              Latest Work That Showcases My Skills
+              Project Phoenix - College Project Management System
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              A recent project that demonstrates my expertise in modern web development and design
+              A comprehensive web-based platform that streamlines project management for college students and faculty
             </p>
           </motion.div>
 
@@ -416,23 +398,25 @@ const Home = () => {
             <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-full -translate-y-32 translate-x-32" />
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-full translate-y-24 -translate-x-24" />
             
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start relative z-10">
               {/* Project Info */}
-              <div className="space-y-6">
+              <div className="space-y-6 lg:col-span-3">
                 <div className="flex items-center space-x-3">
                   <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center text-white text-xl">
-                    🚀
+                    🎓
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white">AI-Powered E-commerce Platform</h3>
-                    <p className="text-gray-600 dark:text-gray-400">Full Stack Web Application</p>
+                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Project Phoenix</h3>
+                    <p className="text-gray-600 dark:text-gray-400">College Project Management System</p>
                   </div>
                 </div>
                 
                 <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-                  Built a sophisticated e-commerce platform featuring AI-powered product recommendations, 
-                  real-time inventory management, and seamless payment processing. The application serves 
-                  10,000+ users with 99.9% uptime and has increased conversion rates by 35%.
+                  Developed a comprehensive end-to-end project management system that streamlines the entire 
+                  academic project lifecycle from proposal submission to final defense. The platform features 
+                  multi-role portals, automated defense scheduling, real-time progress logging, structured 
+                  evaluation forms, and comprehensive reporting, serving 500+ active users across multiple 
+                  departments with 95% user satisfaction.
                 </p>
                 
                 <div className="space-y-4">
@@ -441,79 +425,132 @@ const Home = () => {
                     <ul className="space-y-2 text-gray-600 dark:text-gray-400">
                       <li className="flex items-center space-x-2">
                         <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                        <span>AI-powered product recommendations</span>
+                        <span>Multi-role portal system (Admin, Faculty, Supervisor, Student, Evaluator)</span>
                       </li>
                       <li className="flex items-center space-x-2">
                         <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
-                        <span>Real-time inventory tracking</span>
+                        <span>Automated defense scheduling & evaluation management</span>
                       </li>
                       <li className="flex items-center space-x-2">
                         <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-                        <span>Secure payment processing</span>
+                        <span>Real-time progress logging & supervisor verification</span>
                       </li>
                       <li className="flex items-center space-x-2">
                         <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
-                        <span>Responsive mobile design</span>
+                        <span>Structured evaluation forms & automated grading system</span>
+                      </li>
+                      <li className="flex items-center space-x-2">
+                        <span className="w-2 h-2 bg-red-500 rounded-full"></span>
+                        <span>Comprehensive reporting & analytics dashboard</span>
                       </li>
                     </ul>
                   </div>
                   
                   <div>
-                    <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Technologies Used:</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {['React', 'Node.js', 'PostgreSQL', 'Redis', 'OpenAI API', 'Stripe', 'Docker', 'AWS'].map((tech, index) => (
+                    <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Workflow Phases:</h4>
+                    <div className="grid grid-cols-2 gap-2 mb-4">
+                      {[
+                        'Admin Initiation',
+                        'Team Formation', 
+                        'Proposal Review',
+                        'Defense Scheduling',
+                        'Progress Logging',
+                        'Evaluation',
+                        'Final Defense',
+                        'Reporting'
+                      ].map((phase, index) => (
                         <span
-                          key={tech}
-                          className="px-3 py-1 bg-white/80 dark:bg-gray-700/80 backdrop-blur-sm text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium border border-gray-200/50 dark:border-gray-600/50"
+                          key={phase}
+                          className="px-3 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-700 dark:text-blue-300 rounded-lg text-xs font-medium border border-blue-200/50 dark:border-blue-600/50 text-center"
                         >
-                          {tech}
+                          {phase}
                         </span>
                       ))}
                     </div>
+                    
                   </div>
                 </div>
                 
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <motion.button
-                    className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-200 flex items-center justify-center space-x-2"
+                  <motion.a
+                    href="https://college-project-management-frontend-system.vercel.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-200 flex items-center justify-center space-x-2 cursor-pointer"
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <span>View Live Demo</span>
+                    <span>View Project Demo</span>
                     <span>→</span>
-                  </motion.button>
-                  <motion.button
-                    className="px-6 py-3 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-xl font-semibold hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-200 flex items-center justify-center space-x-2"
+                  </motion.a>
+                  <motion.a
+                    href="https://github.com/nikeshgamal24/College-Project-Management-System"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-6 py-3 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-xl font-semibold hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-200 flex items-center justify-center space-x-2 cursor-pointer"
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <span>View Code</span>
+                    <span>View Source Code</span>
                     <span>📁</span>
-                  </motion.button>
+                  </motion.a>
                 </div>
               </div>
               
-              {/* Project Mockup */}
-              <div className="relative">
+              {/* Project Video Demo */}
+              <div className="relative lg:col-span-2">
                 <div className="relative mx-auto lg:mx-0">
-                  <div className="w-full max-w-md mx-auto">
-                    {/* Device Frame */}
+                  <div className="w-full max-w-3xl mx-auto">
+                    {/* Video Container */}
                     <div className="relative bg-gray-900 rounded-3xl p-3 shadow-2xl">
-                      {/* Screen */}
+                      {/* Video Player */}
                       <div className="bg-white rounded-2xl overflow-hidden">
-                        {/* Mockup Content */}
-                        <div className="h-96 bg-gradient-to-br from-blue-50 to-purple-50 p-4">
-                          <div className="space-y-3">
-                            <div className="h-4 bg-blue-200 rounded w-3/4"></div>
-                            <div className="h-3 bg-gray-200 rounded w-1/2"></div>
-                            <div className="grid grid-cols-2 gap-3">
-                              <div className="h-20 bg-gradient-to-br from-blue-400 to-purple-400 rounded-lg"></div>
-                              <div className="h-20 bg-gradient-to-br from-green-400 to-emerald-400 rounded-lg"></div>
+                        <div className="aspect-video bg-gradient-to-br from-blue-50 to-purple-50 relative">
+                          {/* Video Placeholder - Replace with your Google Drive video link */}
+                                              {/* Google Drive Video Embed - Alternative Method */}
+                          <iframe
+                            className="w-full h-full rounded-xl"
+                            src="https://drive.google.com/file/d/1BghJH2jmCPf4Dxk6U40kVhhLY05znUSS/preview?usp=sharing"
+                            title="Project Phoenix Demo Video"
+                            frameBorder="0"
+                            allowFullScreen
+                            style={{ border: 'none' }}
+                          ></iframe>
+                          
+                          {/* Fallback - If iframe doesn't work, show direct link */}
+                          <div className="absolute inset-0 flex items-center justify-center bg-gray-100 bg-opacity-90" style={{ display: 'none' }}>
+                            <div className="text-center">
+                              <div className="text-4xl mb-2">🎥</div>
+                              <p className="text-gray-700 font-medium mb-2">Video Not Loading?</p>
+                              <a 
+                                href="https://drive.google.com/file/d/1BghJH2jmCPf4Dxk6U40kVhhLY05znUSS/view?usp=sharing"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                              >
+                                Watch on Google Drive
+                              </a>
                             </div>
-                            <div className="h-3 bg-gray-200 rounded w-2/3"></div>
-                            <div className="h-16 bg-gradient-to-br from-orange-400 to-red-400 rounded-lg"></div>
                           </div>
+                        
                         </div>
+                      </div>
+                    </div>
+                    
+                    {/* Technologies Used - Moved under video */}
+                    <div className="mt-8 px-4">
+                      <h4 className="font-semibold text-gray-900 dark:text-white mb-4 text-center">
+                        Technologies Used
+                      </h4>
+                      <div className="flex flex-wrap gap-3 justify-center">
+                        {['React', 'Node.js', 'Express.js', 'MongoDB', 'Socket.io', 'JWT', 'Bootstrap', 'Git'].map((tech, index) => (
+                          <span
+                            key={tech}
+                            className="px-4 py-3 bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-700 dark:text-blue-300 rounded-lg text-base font-medium border border-blue-200/50 dark:border-blue-600/50"
+                          >
+                            {tech}
+                          </span>
+                        ))}
                       </div>
                     </div>
                     
@@ -547,11 +584,13 @@ const Home = () => {
                       🚀
                     </motion.div>
                   </div>
+                                  </div>
                 </div>
               </div>
-            </div>
-          </motion.div>
-        </div>
+            </motion.div>
+
+
+          </div>
       </section>
 
       {/* Quick Stats & Achievements Section */}
@@ -565,42 +604,42 @@ const Home = () => {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              Quick Stats & Achievements 🏆
+              Academic Excellence & Achievements 🏆
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-400">
-              Numbers that tell the story of my journey and expertise
+              Outstanding academic performance and competition wins that showcase my dedication and skills
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             {[
               {
-                number: "50+",
-                label: "Projects Completed",
-                icon: "💼",
+                number: "3.92",
+                label: "CGPA Score",
+                icon: "🎓",
                 color: "from-blue-500 to-cyan-600",
-                description: "From small websites to enterprise applications"
+                description: "University topper in Software Engineering Faculty"
               },
               {
-                number: "3+",
-                label: "Years Experience",
-                icon: "⏰",
+                number: "1st",
+                label: "Position",
+                icon: "🏆",
                 color: "from-green-500 to-emerald-600",
-                description: "Full-stack development & modern technologies"
+                description: "NCIT Final Year Project Exhibition 2024"
               },
               {
-                number: "100%",
-                label: "Client Satisfaction",
-                icon: "😊",
+                number: "7th",
+                label: "University Rank",
+                icon: "⭐",
                 color: "from-purple-500 to-pink-600",
-                description: "Delivering quality that exceeds expectations"
+                description: "Overall university topper ranking"
               },
               {
-                number: "15+",
-                label: "Technologies",
-                icon: "🚀",
+                number: "1st",
+                label: "Runner Up",
+                icon: "🥈",
                 color: "from-orange-500 to-red-600",
-                description: "Mastered across frontend & backend"
+                description: "Model Competition by Civil Engineering Society 2018"
               }
             ].map((stat, index) => (
               <motion.div
@@ -644,7 +683,7 @@ const Home = () => {
           </div>
 
           {/* Additional Achievement Cards */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <motion.div
               className="bg-gradient-to-br from-blue-500 to-purple-600 text-white p-8 rounded-2xl relative overflow-hidden"
               initial={{ opacity: 0, x: -20 }}
@@ -653,13 +692,14 @@ const Home = () => {
               transition={{ duration: 0.6 }}
             >
               <div className="relative z-10">
-                <h3 className="text-2xl font-bold mb-4">Latest Achievement</h3>
+                <h3 className="text-2xl font-bold mb-4">🏆 Project Exhibition Winner</h3>
                 <p className="text-blue-100 mb-4">
-                  Successfully delivered a complex e-commerce platform serving 10,000+ users with 99.9% uptime
+                  Secured 1st Position in NCIT Final Year Project Exhibition 2024 with Project Phoenix - 
+                  a comprehensive College Project Management System
                 </p>
                 <div className="flex items-center space-x-2">
-                  <span className="text-2xl">🎯</span>
-                  <span className="font-medium">Performance Excellence Award</span>
+                  <span className="text-2xl">🎓</span>
+                  <span className="font-medium">Nepal College of Information Technology</span>
                 </div>
               </div>
               <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-16 translate-x-16" />
@@ -673,16 +713,38 @@ const Home = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <div className="relative z-10">
-                <h3 className="text-2xl font-bold mb-4">Current Focus</h3>
+                <h3 className="text-2xl font-bold mb-4">⭐ Academic Excellence</h3>
                 <p className="text-green-100 mb-4">
-                  Leading development of AI-powered recommendation system using machine learning and real-time data
+                  University topper in Software Engineering Faculty with CGPA 3.92 and ranked 7th overall 
+                  among all university students
                 </p>
                 <div className="flex items-center space-x-2">
-                  <span className="text-2xl">🤖</span>
-                  <span className="font-medium">AI/ML Innovation</span>
+                  <span className="text-2xl">🏅</span>
+                  <span className="font-medium">Outstanding Academic Performance</span>
                 </div>
               </div>
               <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full translate-y-12 -translate-x-12" />
+            </motion.div>
+
+            <motion.div
+              className="bg-gradient-to-br from-orange-500 to-red-600 text-white p-8 rounded-2xl relative overflow-hidden"
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              <div className="relative z-10">
+                <h3 className="text-2xl font-bold mb-4">🥈 Model Competition</h3>
+                <p className="text-orange-100 mb-4">
+                  Secured Runner Up position in Model Competition organized by Civil Engineering Students Society 
+                  in 2018 during +2 level
+                </p>
+                <div className="flex items-center space-x-2">
+                  <span className="text-2xl">🏗️</span>
+                  <span className="font-medium">Civil Engineering Society</span>
+                </div>
+              </div>
+              <div className="absolute top-0 left-0 w-20 h-20 bg-white/10 rounded-full -translate-y-10 -translate-x-10" />
             </motion.div>
           </div>
         </div>
@@ -824,107 +886,9 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Services Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="inline-flex items-center px-4 py-2 bg-green-100 dark:bg-green-900/20 text-green-800 dark:text-green-200 rounded-full text-sm font-medium mb-4">
-              <span className="mr-2">⭐</span>
-              My Best Quality Service
-            </div>
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-6">
-              What I Can Do For You
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              I specialize in creating exceptional digital experiences that combine beautiful design with powerful functionality
-            </p>
-          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                icon: "🎨",
-                title: "UI/UX Design",
-                description: "Creating intuitive and beautiful user interfaces that enhance user experience and drive engagement",
-                color: "from-blue-500 to-cyan-600"
-              },
-              {
-                icon: "💻",
-                title: "Frontend Development",
-                description: "Building responsive, fast, and accessible web applications using modern technologies",
-                color: "from-purple-500 to-pink-600"
-              },
-              {
-                icon: "⚡",
-                title: "Backend Development",
-                description: "Developing robust server-side solutions and APIs that power your applications",
-                color: "from-green-500 to-emerald-600"
-              },
-              {
-                icon: "📱",
-                title: "Mobile Development",
-                description: "Creating cross-platform mobile applications that work seamlessly across devices",
-                color: "from-orange-500 to-red-600"
-              },
-              {
-                icon: "🔧",
-                title: "DevOps & Deployment",
-                description: "Setting up CI/CD pipelines and deploying applications to production environments",
-                color: "from-indigo-500 to-purple-600"
-              },
-              {
-                icon: "📊",
-                title: "Performance Optimization",
-                description: "Optimizing applications for speed, scalability, and better user experience",
-                color: "from-teal-500 to-blue-600"
-              }
-            ].map((service, index) => (
-              <motion.div
-                key={index}
-                className="group cursor-pointer"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ y: -8, scale: 1.02 }}
-              >
-                <div className="p-6 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-200/50 dark:border-gray-600/50 h-full relative overflow-hidden">
-                  {/* Service icon */}
-                  <div className={`w-16 h-16 bg-gradient-to-br ${service.color} rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                    {service.icon}
-                  </div>
-                  
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-                    {service.title}
-                  </h3>
-                  
-                  <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
-                    {service.description}
-                  </p>
-                  
-                  {/* Read more button */}
-                  <motion.button
-                    className="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    Read More →
-                  </motion.button>
-                  
-                  {/* Hover effect */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-2xl`} />
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+
+
 
       {/* Enhanced Skills Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
@@ -994,14 +958,14 @@ const Home = () => {
               My Skills
             </div>
             <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-6">
-              Let's Explore Popular Skills and Experience
+              My Technical Skills & Expertise
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              I've been honing my skills across various technologies and frameworks to deliver the best possible solutions
+              Organized by category to showcase my comprehensive development capabilities
             </p>
           </motion.div>
 
-          {/* Skills Grid */}
+          {/* Skills Categories Grid */}
           <motion.div
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             initial="hidden"
@@ -1009,110 +973,239 @@ const Home = () => {
             viewport={{ once: true, margin: "-100px" }}
             variants={staggerVariants}
           >
-            {[
-              {
-                name: "React & Next.js",
-                icon: "⚛️",
-                color: "from-blue-500 to-cyan-600",
-                description: "Building modern, scalable React applications with Next.js for optimal performance",
-                tags: ["Hooks", "Context", "SSR", "SSG"],
-                experience: "4+ years"
-              },
-              {
-                name: "Node.js & Express",
-                icon: "🟢",
-                color: "from-green-500 to-emerald-600",
-                description: "Developing robust backend APIs and server-side applications",
-                tags: ["REST APIs", "Middleware", "Authentication", "Database"],
-                experience: "3+ years"
-              },
-              {
-                name: "TypeScript",
-                icon: "🔷",
-                color: "from-blue-600 to-indigo-600",
-                description: "Writing type-safe, maintainable code with enhanced developer experience",
-                tags: ["Types", "Interfaces", "Generics", "Utility Types"],
-                experience: "2+ years"
-              },
-              {
-                name: "Tailwind CSS",
-                icon: "🎨",
-                color: "from-cyan-500 to-blue-600",
-                description: "Creating beautiful, responsive designs with utility-first CSS framework",
-                tags: ["Responsive", "Custom CSS", "Animations", "Dark Mode"],
-                experience: "3+ years"
-              },
-              {
-                name: "PostgreSQL & MongoDB",
-                icon: "🗄️",
-                color: "from-purple-500 to-pink-600",
-                description: "Designing and managing both relational and NoSQL databases",
-                tags: ["SQL", "NoSQL", "Indexing", "Performance"],
-                experience: "3+ years"
-              },
-              {
-                name: "Docker & AWS",
-                icon: "🐳",
-                color: "from-blue-500 to-purple-600",
-                description: "Containerizing applications and deploying to cloud infrastructure",
-                tags: ["Containers", "CI/CD", "Cloud", "DevOps"],
-                experience: "2+ years"
-              }
-            ].map((skill, index) => (
-              <motion.div
-                key={index}
-                className="group cursor-pointer"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ y: -8, scale: 1.02 }}
-              >
-                <div className="p-6 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-2xl shadow-xl border border-white/20 dark:border-gray-600/50 h-full relative overflow-hidden group">
-                  {/* Animated background gradient */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${skill.color} opacity-0 group-hover:opacity-10 transition-all duration-500 rounded-2xl`} />
-                  
-                  {/* Skill icon with enhanced styling */}
-                  <div className={`w-20 h-20 bg-gradient-to-br ${skill.color} rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-all duration-300 shadow-lg group-hover:shadow-2xl relative z-10`}>
-                    {skill.icon}
-                  </div>
-                  
-                  {/* Skill name with experience */}
-                  <div className="mb-4 relative z-10">
-                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-gray-900 group-hover:to-gray-600 dark:group-hover:from-white dark:group-hover:to-gray-300 transition-all duration-300">
-                      {skill.name}
-                    </h3>
-                    <div className="inline-flex items-center px-3 py-1 bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-800 dark:text-blue-200 rounded-full text-sm font-medium border border-blue-200 dark:border-blue-700">
-                      {skill.experience}
-                    </div>
-                  </div>
-                  
-                  {/* Description with enhanced typography */}
-                  <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed text-sm relative z-10 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors duration-300">
-                    {skill.description}
-                  </p>
-                  
-                  {/* Enhanced tags with hover effects */}
-                  <div className="flex flex-wrap gap-2 relative z-10">
-                    {skill.tags.map((tag, tagIndex) => (
-                      <motion.span
-                        key={tagIndex}
-                        className="px-3 py-1.5 bg-white/80 dark:bg-gray-700/80 text-gray-700 dark:text-gray-300 rounded-xl text-xs font-medium border border-gray-200/50 dark:border-gray-600/50 backdrop-blur-sm group-hover:bg-white/90 dark:group-hover:bg-gray-700/90 transition-all duration-300 cursor-default"
-                        whileHover={{ scale: 1.05, y: -2 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        {tag}
-                      </motion.span>
-                    ))}
-                  </div>
-                  
-                  {/* Floating particles effect */}
-                  <div className="absolute top-4 right-4 w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100 animate-pulse" />
-                  <div className="absolute bottom-6 right-6 w-1.5 h-1.5 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 delay-200 animate-pulse" />
-                  <div className="absolute top-1/2 left-2 w-1 h-1 bg-gradient-to-r from-orange-400 to-red-400 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 delay-300 animate-pulse" />
+            {/* Frontend Development */}
+            <motion.div
+              className="group cursor-pointer"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              whileHover={{ y: -8, scale: 1.02 }}
+            >
+              <div className="p-6 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-2xl shadow-xl border border-white/20 dark:border-gray-600/50 h-full relative overflow-hidden group">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-600 opacity-0 group-hover:opacity-10 transition-all duration-500 rounded-2xl" />
+                
+                <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-all duration-300 shadow-lg group-hover:shadow-2xl relative z-10">
+                  🌐
                 </div>
-              </motion.div>
-            ))}
+                
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-gray-900 group-hover:to-gray-600 dark:group-hover:from-white dark:group-hover:to-gray-300 transition-all duration-300 relative z-10">
+                  Frontend Development
+                </h3>
+                
+                <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed text-sm relative z-10 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors duration-300">
+                  Creating responsive, interactive user interfaces with modern web technologies and frameworks
+                </p>
+                
+                <div className="flex flex-wrap gap-2 relative z-10">
+                  {['HTML', 'CSS', 'JavaScript', 'React'].map((tech, index) => (
+                    <motion.span
+                      key={index}
+                      className="px-3 py-1.5 bg-white/80 dark:bg-gray-700/80 text-gray-700 dark:text-gray-300 rounded-xl text-sm font-medium border border-gray-200/50 dark:border-gray-600/50 backdrop-blur-sm group-hover:bg-white/90 dark:group-hover:bg-gray-700/90 transition-all duration-300"
+                      whileHover={{ scale: 1.05, y: -2 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {tech}
+                    </motion.span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Backend Development */}
+            <motion.div
+              className="group cursor-pointer"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              whileHover={{ y: -8, scale: 1.02 }}
+            >
+              <div className="p-6 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-2xl shadow-xl border border-white/20 dark:border-gray-600/50 h-full relative overflow-hidden group">
+                <div className="absolute inset-0 bg-gradient-to-br from-green-500 to-emerald-600 opacity-0 group-hover:opacity-10 transition-all duration-500 rounded-2xl" />
+                
+                <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-all duration-300 shadow-lg group-hover:shadow-2xl relative z-10">
+                  ⚡
+                </div>
+                
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:bg-gradient-to-r group-hover:from-gray-900 group-hover:to-gray-600 dark:group-hover:from-white dark:group-hover:to-gray-300 transition-all duration-300 relative z-10">
+                  Backend Development
+                </h3>
+                
+                <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed text-sm relative z-10 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors duration-300">
+                  Building robust server-side applications, APIs, and scalable backend solutions
+                </p>
+                
+                <div className="flex flex-wrap gap-2 relative z-10">
+                  {['Node.js', 'Express.js', 'Python'].map((tech, index) => (
+                    <motion.span
+                      key={index}
+                      className="px-3 py-1.5 bg-white/80 dark:bg-gray-700/80 text-gray-700 dark:text-gray-300 rounded-xl text-sm font-medium border border-gray-200/50 dark:border-gray-600/50 backdrop-blur-sm group-hover:bg-white/90 dark:group-hover:bg-gray-700/90 transition-all duration-300"
+                      whileHover={{ scale: 1.05, y: -2 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {tech}
+                    </motion.span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+
+            {/* API Testing Tools */}
+            <motion.div
+              className="group cursor-pointer"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              whileHover={{ y: -8, scale: 1.02 }}
+            >
+              <div className="p-6 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-2xl shadow-xl border border-white/20 dark:border-gray-600/50 h-full relative overflow-hidden group">
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-500 to-pink-600 opacity-0 group-hover:opacity-10 transition-all duration-500 rounded-2xl" />
+                
+                <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-all duration-300 shadow-lg group-hover:shadow-2xl relative z-10">
+                  🔌
+                </div>
+                
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-gray-900 group-hover:to-gray-600 dark:group-hover:from-white dark:group-hover:to-gray-300 transition-all duration-300 relative z-10">
+                  API Testing Tools
+                </h3>
+                
+                <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed text-sm relative z-10 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors duration-300">
+                  Testing and debugging REST APIs with professional tools for quality assurance
+                </p>
+                
+                <div className="flex flex-wrap gap-2 relative z-10">
+                  {['Postman', 'Thunder Client'].map((tech, index) => (
+                    <motion.span
+                      key={index}
+                      className="px-3 py-1.5 bg-white/80 dark:bg-gray-700/80 text-gray-700 dark:text-gray-300 rounded-xl text-sm font-medium border border-gray-200/50 dark:border-gray-600/50 backdrop-blur-sm group-hover:bg-white/90 dark:group-hover:bg-gray-700/90 transition-all duration-300"
+                      whileHover={{ scale: 1.05, y: -2 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {tech}
+                    </motion.span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Databases */}
+            <motion.div
+              className="group cursor-pointer"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              whileHover={{ y: -8, scale: 1.02 }}
+            >
+              <div className="p-6 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-2xl shadow-xl border border-white/20 dark:border-gray-600/50 h-full relative overflow-hidden group">
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-red-600 opacity-0 group-hover:opacity-10 transition-all duration-500 rounded-2xl" />
+                
+                <div className="w-20 h-20 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-all duration-300 shadow-lg group-hover:shadow-2xl relative z-10">
+                  🗄️
+                </div>
+                
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-gray-900 group-hover:to-gray-600 dark:group-hover:from-white dark:group-hover:to-gray-300 transition-all duration-300 relative z-10">
+                  Databases
+                </h3>
+                
+                <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed text-sm relative z-10 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors duration-300">
+                  Designing and managing both relational and NoSQL databases for optimal performance
+                </p>
+                
+                <div className="flex flex-wrap gap-2 relative z-10">
+                  {['MongoDB', 'MSSQL', 'PostgreSQL', 'MySQL'].map((tech, index) => (
+                    <motion.span
+                      key={index}
+                      className="px-3 py-1.5 bg-white/80 dark:bg-gray-700/80 text-gray-700 dark:text-gray-300 rounded-xl text-sm font-medium border border-gray-200/50 dark:border-gray-600/50 backdrop-blur-sm group-hover:bg-white/90 dark:group-hover:bg-gray-700/90 transition-all duration-300"
+                      whileHover={{ scale: 1.05, y: -2 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {tech}
+                    </motion.span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+
+            {/* DevOps & Tools */}
+            <motion.div
+              className="group cursor-pointer"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              whileHover={{ y: -8, scale: 1.02 }}
+            >
+              <div className="p-6 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-2xl shadow-xl border border-white/20 dark:border-gray-600/50 h-full relative overflow-hidden group">
+                <div className="absolute inset-0 bg-gradient-to-br from-teal-500 to-blue-600 opacity-0 group-hover:opacity-10 transition-all duration-500 rounded-2xl" />
+                
+                <div className="w-20 h-20 bg-gradient-to-br from-teal-500 to-blue-600 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-all duration-300 shadow-lg group-hover:shadow-2xl relative z-10">
+                  🐳
+                </div>
+                
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-gray-900 group-hover:to-gray-600 dark:group-hover:from-white dark:group-hover:to-gray-200 transition-all duration-300 relative z-10">
+                  DevOps & Tools
+                </h3>
+                
+                <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed text-sm relative z-10 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors duration-300">
+                  Containerizing applications and implementing modern deployment practices
+                </p>
+                
+                <div className="flex flex-wrap gap-2 relative z-10">
+                  {['Docker'].map((tech, index) => (
+                    <motion.span
+                      key={index}
+                      className="px-3 py-1.5 bg-white/80 dark:bg-gray-700/80 text-gray-700 dark:text-gray-300 rounded-xl text-sm font-medium border border-gray-200/50 dark:border-gray-600/50 backdrop-blur-sm group-hover:bg-white/90 dark:group-hover:bg-gray-700/90 transition-all duration-300"
+                      whileHover={{ scale: 1.05, y: -2 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {tech}
+                    </motion.span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+
+            {/* AI/ML Learning */}
+            <motion.div
+              className="group cursor-pointer"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              whileHover={{ y: -8, scale: 1.02 }}
+            >
+              <div className="p-6 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-2xl shadow-xl border border-white/20 dark:border-gray-600/50 h-full relative overflow-hidden group">
+                <div className="absolute inset-0 bg-gradient-to-br from-indigo-500 to-purple-600 opacity-0 group-hover:opacity-10 transition-all duration-500 rounded-2xl" />
+                
+                <div className="w-20 h-20 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-all duration-300 shadow-lg group-hover:shadow-2xl relative z-10">
+                  🤖
+                </div>
+                
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-gray-900 group-hover:to-gray-600 dark:group-hover:from-white dark:group-hover:to-gray-200 transition-all duration-300 relative z-10">
+                  AI/ML Learning
+                </h3>
+                
+                <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed text-sm relative z-10 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors duration-300">
+                  Actively learning machine learning algorithms, LLM/NLP, and AI tools
+                </p>
+                
+                <div className="flex flex-wrap gap-2 relative z-10">
+                  {['Machine Learning', 'LLM/NLP', 'AI Tools', 'ChatGPT-5', 'Cursor AI', 'Gemini'].map((tech, index) => (
+                    <motion.span
+                      key={index}
+                      className="px-3 py-1.5 bg-white/80 dark:bg-gray-700/80 text-gray-700 dark:text-gray-300 rounded-xl text-sm font-medium border border-gray-200/50 dark:border-gray-600/50 backdrop-blur-sm group-hover:bg-white/90 dark:group-hover:bg-gray-700/90 transition-all duration-300"
+                      whileHover={{ scale: 1.05, y: -2 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {tech}
+                    </motion.span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
 
           {/* Additional Skills Showcase */}
@@ -1135,13 +1228,16 @@ const Home = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[
                 { name: "Git & GitHub", icon: "📚" },
+                { name: "GitLab", icon: "🦊" },
                 { name: "VS Code", icon: "💻" },
                 { name: "Postman", icon: "📮" },
                 { name: "Vercel", icon: "🚀" },
-                { name: "Figma", icon: "🎨" },
+                { name: "Neon Postgres", icon: "💚" },
                 { name: "Linux", icon: "🐧" },
-                { name: "Nginx", icon: "🌐" },
-                { name: "Redis", icon: "⚡" }
+                { name: "MSSQL", icon: "🗄️" },
+                { name: "Cursor AI", icon: "🤖" },
+                { name: "ChatGPT", icon: "💬" },
+                { name: "Gemini", icon: "✨" }
               ].map((skill, index) => (
                 <motion.div
                   key={index}
