@@ -19,7 +19,7 @@ export const siteConfig = {
   projectFilters: {
     minStars: 0,
     allowedTopics: ["portfolio", "showcase", "demo", "web-app", "react", "node","javascript","php"],
-    includeRepos: ["College-Project-Management-System", "Book-Recommendation-System","Car-Price-Prediction-Project","Medical-Insurance-Prediction-Project ","Bloodlink","Charity-Auction-Site","MathQuest-Backend","Customer-Claim-Value-Forecasting-Project","Crowdfundr"], // Explicit repos to include 
+    includeRepos: ["College-Project-Management-System", "Book-Recommendation-System","Car-Price-Prediction-Project","Medical-Insurance-Prediction-Project ","Bloodlink","Charity-Auction-Site","MathQuest-Backend","Customer-Claim-Value-Forecasting-Project","Crowdfundr","Portfolio-Website"], // Explicit repos to include 
     // to include for future projects: crowdfundr. , math-quest , bloodlink (if possible) , 
     excludeRepos: ["old-portfolio", "test-repo"] // Repos to exclude
   },
