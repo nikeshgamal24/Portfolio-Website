@@ -16,6 +16,25 @@ const DrawingCanvas = ({ isOpen, onClose }) => {
     '#8B5CF6', '#EC4899', '#06B6D4', '#84CC16'
   ];
 
+  // Helper function to get coordinates from both mouse and touch events
+  const getCoordinates = (e) => {
+    if (e.touches && e.touches[0]) {
+      // Touch event
+      const rect = canvasRef.current.getBoundingClientRect();
+      const touch = e.touches[0];
+      return {
+        x: touch.clientX - rect.left,
+        y: touch.clientY - rect.top
+      };
+    } else {
+      // Mouse event
+      return {
+        x: e.nativeEvent.offsetX,
+        y: e.nativeEvent.offsetY
+      };
+    }
+  };
+
   useEffect(() => {
     if (isOpen && canvasRef.current) {
       const canvas = canvasRef.current;
@@ -50,43 +69,56 @@ const DrawingCanvas = ({ isOpen, onClose }) => {
       }
     };
 
+    // Prevent scrolling while drawing
+    const preventScroll = (e) => {
+      if (isDrawing) {
+        e.preventDefault();
+      }
+    };
+
     if (isOpen) {
       document.addEventListener('keydown', handleEscape);
       document.addEventListener('mousedown', handleClickOutside);
       document.body.style.overflow = 'hidden'; // Prevent background scrolling
+      
+      // Add touch event listeners with passive: false to allow preventDefault
+      document.addEventListener('touchmove', preventScroll, { passive: false });
+      document.addEventListener('touchstart', preventScroll, { passive: false });
     }
 
     return () => {
       document.removeEventListener('keydown', handleEscape);
       document.removeEventListener('mousedown', handleClickOutside);
       document.body.style.overflow = 'unset'; // Restore scrolling
+      document.removeEventListener('touchmove', preventScroll);
+      document.removeEventListener('touchstart', preventScroll);
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, onClose, isDrawing]);
 
   const startDrawing = (e) => {
     setIsDrawing(true);
-    const { offsetX, offsetY } = e.nativeEvent;
-    setCurrentPath([{ x: offsetX, y: offsetY }]);
+    const coords = getCoordinates(e);
+    setCurrentPath([{ x: coords.x, y: coords.y }]);
   };
 
   const draw = (e) => {
     if (!isDrawing) return;
     
-    const { offsetX, offsetY } = e.nativeEvent;
-    const newPoint = { x: offsetX, y: offsetY };
+    const coords = getCoordinates(e);
+    const newPoint = { x: coords.x, y: coords.y };
     
     setCurrentPath(prev => [...prev, newPoint]);
     
     if (contextRef.current) {
       const context = contextRef.current;
       context.beginPath();
-      context.moveTo(currentPath[currentPath.length - 1]?.x || offsetX, currentPath[currentPath.length - 1]?.y || offsetY);
-      context.lineTo(offsetX, offsetY);
+      context.moveTo(currentPath[currentPath.length - 1]?.x || coords.x, currentPath[currentPath.length - 1]?.y || coords.y);
+      context.lineTo(coords.x, coords.y);
       context.stroke();
     }
   };
 
-  const stopDrawing = () => {
+  const stopDrawing = (e) => {
     if (isDrawing && currentPath.length > 0) {
       setDrawingHistory(prev => [...prev, { path: currentPath, color: brushColor, size: brushSize }]);
       setCurrentPath([]);
@@ -243,11 +275,15 @@ const DrawingCanvas = ({ isOpen, onClose }) => {
             <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-900">
               <canvas
                 ref={canvasRef}
-                className="w-full h-96 cursor-crosshair"
+                className="w-full h-96 cursor-crosshair touch-none"
                 onMouseDown={startDrawing}
                 onMouseMove={draw}
                 onMouseUp={stopDrawing}
                 onMouseLeave={stopDrawing}
+                onTouchStart={startDrawing}
+                onTouchMove={draw}
+                onTouchEnd={stopDrawing}
+                onTouchCancel={stopDrawing}
               />
             </div>
 
@@ -268,7 +304,8 @@ const DrawingCanvas = ({ isOpen, onClose }) => {
                 </motion.div>
                 <p className="text-gray-700 dark:text-gray-300 text-sm">
                   <strong>Let's get creative!</strong> Draw something fun, doodle, or just experiment with colors. 
-                  This is your digital canvas - make it yours! 🎨
+                  This is your digital canvas - make it yours! 🎨 <br />
+                  <span className="text-xs text-gray-500 mt-1 block">💡 Works on both desktop and mobile devices!</span>
                 </p>
               </div>
             </motion.div>
