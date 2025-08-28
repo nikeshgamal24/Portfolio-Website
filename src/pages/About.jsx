@@ -230,22 +230,33 @@ const About = () => {
               </h2>
               <div className="prose prose-lg dark:prose-invert max-w-none">
                 <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  I'm a {siteConfig.role} with a passion for building digital experiences that make a difference. 
-                  With several years of experience in software development, I've worked on projects ranging from 
-                  small business solutions to large-scale enterprise applications.
+                  I'm Nikesh Gamal, a passionate Software Engineer with a strong foundation in both frontend and backend development. 
+                  I specialize in building modern web applications using React, Node.js, and cutting-edge technologies that solve real-world problems.
                 </p>
                 <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  My journey in tech started with a curiosity about how things work on the web, which led me to 
-                  pursue a degree in Computer Science. Since then, I've been fortunate to work with amazing teams 
-                  and contribute to projects that impact thousands of users.
+                  My academic journey at Nepal College of Information Technology, Balkumaru, Lalitpur (affiliated with Pokhara University) has been marked by excellence - I'm the University topper in Software Engineering 
+                  faculty with a CGPA of 3.92 and ranked 7th overall university-wide. I've also won the Project Exhibition for my Final Year 
+                  Project "Project Phoenix" - a comprehensive College Project Management System that showcases my full-stack development skills.
+                </p>
+                <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  Currently, I'm actively expanding my expertise in Machine Learning and LLM/NLP technologies, studying since March 2025. 
+                  I'm passionate about AI tools and exploring how they can enhance software development workflows.
                 </p>
                 <p className="text-gray-700 dark:text-gray-300">
-                  When I'm not coding, you can find me exploring new technologies, contributing to open source, 
-                  or sharing knowledge with the developer community. I believe in continuous learning and 
-                  staying curious about emerging trends in software development.
+                  I believe in writing clean, maintainable code and continuously staying updated with emerging technologies. 
+                  My curiosity lies in solving real problems - whether they're small everyday issues or complex challenges. 
+                  My goal is to create software solutions that not only meet technical requirements but also tackle and handle real problems that people actually face.
                 </p>
               </div>
             </div>
+          </motion.section>
+
+          {/* Timeline Section - My Journey */}
+          <motion.section className="mb-20" variants={itemVariants}>
+            <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
+              My Journey
+            </h2>
+            <Timeline items={timelineData} />
           </motion.section>
 
           {/* Skills Section - New Creative Design */}
@@ -553,55 +564,9 @@ const About = () => {
             </div>
           </motion.section>
 
-          {/* Timeline Section */}
-          <motion.section className="mb-20" variants={itemVariants}>
-            <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
-              My Journey
-            </h2>
-            <Timeline items={timelineData} />
-          </motion.section>
 
-          {/* Values Section */}
-          <motion.section className="mb-20" variants={itemVariants}>
-            <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
-              What I Value
-            </h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[
-                {
-                  title: 'Quality',
-                  description: 'Writing clean, maintainable code that stands the test of time.',
-                  icon: '✨'
-                },
-                {
-                  title: 'Learning',
-                  description: 'Continuously improving and staying up-to-date with new technologies.',
-                  icon: '🚀'
-                },
-                {
-                  title: 'Collaboration',
-                  description: 'Working together to achieve better results than working alone.',
-                  icon: '🤝'
-                }
-              ].map((value, index) => (
-                <motion.div
-                  key={index}
-                  className="text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700"
-                  whileHover={{ y: -5, scale: 1.02 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <div className="text-4xl mb-4">{value.icon}</div>
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
-                    {value.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    {value.description}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.section>
+
+
 
           {/* Call to Action */}
           <motion.section className="text-center" variants={itemVariants}>
