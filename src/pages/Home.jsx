@@ -276,7 +276,7 @@ const Home = () => {
                     <div className="w-full h-full bg-gray-200 dark:bg-gray-700 rounded-3xl flex items-center justify-center overflow-hidden">
                       {/* Profile Image */}
                       <img
-                        src="https://scontent.fktm23-1.fna.fbcdn.net/v/t39.30808-6/480892137_2631828610342618_7123222790012128433_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHDWQGY7ImHSg_HmWWoXm-TmBeHEr57RMaYF4cSvntExktfxqGXe6cCGjnf-IEl4X2H7iln-LoKW7PzIUheX1lS&_nc_ohc=E6QspX5BaFQQ7kNvwGskZHY&_nc_oc=AdmhEXMVdp-nH1igdouDzrgmb4QlBxmPVH8YLJpmff45hn54kH1wo9JMnUPDY3D0EXBXiJBc6yGTBm5Q85pSbn8h&_nc_zt=23&_nc_ht=scontent.fktm23-1.fna&_nc_gid=oa7_GH2YN3_G31w0H1H3Cw&oh=00_AfU_7lm5Pi5I52NAOyLjIEsgWugkBfQ1GWEJ6c-trltjyw&oe=68B50760"
+                        src="/images/personal-photo.jpg"
                         alt="Nikesh Gamal - Software Engineer"
                         className="w-full h-full object-cover rounded-3xl"
                         onError={(e) => {
