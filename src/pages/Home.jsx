@@ -10,6 +10,16 @@ const Home = () => {
   const [isSkillsOpen, setIsSkillsOpen] = useState(false);
   const [isDrawingOpen, setIsDrawingOpen] = useState(false);
   const [isResumeOpen, setIsResumeOpen] = useState(false);
+  
+  // Contact form state
+  const [contactForm, setContactForm] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -103,6 +113,62 @@ const Home = () => {
         );
       default:
         return null;
+    }
+  };
+
+  // Contact form handlers
+  const handleContactInputChange = (e) => {
+    const { name, value } = e.target;
+    setContactForm(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleContactSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      // Check if EmailJS is configured
+      if (import.meta.env.VITE_EMAILJS_SERVICE_ID && 
+          import.meta.env.VITE_EMAILJS_TEMPLATE_ID && 
+          import.meta.env.VITE_EMAILJS_PUBLIC_KEY) {
+        
+        // Import EmailJS dynamically
+        const emailjs = await import('@emailjs/browser');
+        
+        // Initialize EmailJS
+        emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
+        
+        // Send email using EmailJS
+        const result = await emailjs.send(
+          import.meta.env.VITE_EMAILJS_SERVICE_ID,
+          import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+          {
+            from_name: contactForm.name,
+            from_email: contactForm.email,
+            message: `Subject: ${contactForm.subject}\n\nMessage: ${contactForm.message}`,
+            name: contactForm.name,
+            email: contactForm.email
+          }
+        );
+        
+        console.log('Email sent successfully:', result);
+        setSubmitStatus('success');
+        setContactForm({ name: '', email: '', subject: '', message: '' });
+      } else {
+        // Fallback to mailto
+        const mailtoUrl = `mailto:${siteConfig.contact.email}?subject=${encodeURIComponent(contactForm.subject)}&body=${encodeURIComponent(`Name: ${contactForm.name}\nEmail: ${contactForm.email}\n\nMessage: ${contactForm.message}`)}`;
+        window.open(mailtoUrl);
+        setSubmitStatus('mailto');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -226,28 +292,28 @@ const Home = () => {
 
                           {/* Social Links Section */}
             <div className="space-y-3 pt-8">
-              <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide">
-                Find with me
-              </h3>
-              <div className="flex space-x-4">
-                {quickLinks.map((link, index) => (
-                  <motion.a
-                    key={link.name}
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-3 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-xl transition-all duration-200"
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    whileTap={{ scale: 0.9 }}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.6 + index * 0.1 }}
-                  >
-                    {getIcon(link.icon)}
-                  </motion.a>
-                ))}
+                  <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide">
+                    Find with me
+                  </h3>
+                  <div className="flex space-x-4">
+                    {quickLinks.map((link, index) => (
+                      <motion.a
+                        key={link.name}
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-3 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-xl transition-all duration-200"
+                        whileHover={{ scale: 1.1, y: -2 }}
+                        whileTap={{ scale: 0.9 }}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.6 + index * 0.1 }}
+                      >
+                        {getIcon(link.icon)}
+                      </motion.a>
+                    ))}
+                </div>
               </div>
-            </div>
             </motion.div>
 
             {/* Right Column - Profile & Stats */}
@@ -346,7 +412,7 @@ const Home = () => {
                 </h3>
                 <div className="flex flex-wrap gap-3 w-full">
                   {['Node.js', 'Express.js', 'Python','Javascript','MongoDB','MSSQL','PostgreSQL','Postman','React','CSS','Docker'].map((skill, index) => (
-                    <motion.div
+                  <motion.div
                       key={skill}
                       className="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg text-sm font-medium shadow-lg whitespace-nowrap"
                       initial={{ opacity: 0, scale: 0.8 }}
@@ -355,9 +421,9 @@ const Home = () => {
                       whileHover={{ scale: 1.05, y: -2 }}
                     >
                       {skill}
-                    </motion.div>
-                  ))}
-                </div>
+                  </motion.div>
+                ))}
+              </div>
               </div>
               
             </motion.div>
@@ -584,13 +650,13 @@ const Home = () => {
                       🚀
                     </motion.div>
                   </div>
-                                  </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
+          </motion.div>
 
 
-          </div>
+        </div>
       </section>
 
       {/* Quick Stats & Achievements Section */}
@@ -974,7 +1040,7 @@ const Home = () => {
             variants={staggerVariants}
           >
             {/* Frontend Development */}
-            <motion.div
+              <motion.div
               className="group cursor-pointer"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -1000,7 +1066,7 @@ const Home = () => {
                 <div className="flex flex-wrap gap-2 relative z-10">
                   {['HTML', 'CSS', 'JavaScript', 'React'].map((tech, index) => (
                     <motion.span
-                      key={index}
+                key={index}
                       className="px-3 py-1.5 bg-white/80 dark:bg-gray-700/80 text-gray-700 dark:text-gray-300 rounded-xl text-sm font-medium border border-gray-200/50 dark:border-gray-600/50 backdrop-blur-sm group-hover:bg-white/90 dark:group-hover:bg-gray-700/90 transition-all duration-300"
                       whileHover={{ scale: 1.05, y: -2 }}
                       transition={{ duration: 0.2 }}
@@ -1014,23 +1080,23 @@ const Home = () => {
 
             {/* Backend Development */}
             <motion.div
-              className="group cursor-pointer"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+                className="group cursor-pointer"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              whileHover={{ y: -8, scale: 1.02 }}
-            >
-              <div className="p-6 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-2xl shadow-xl border border-white/20 dark:border-gray-600/50 h-full relative overflow-hidden group">
+                whileHover={{ y: -8, scale: 1.02 }}
+              >
+                <div className="p-6 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-2xl shadow-xl border border-white/20 dark:border-gray-600/50 h-full relative overflow-hidden group">
                 <div className="absolute inset-0 bg-gradient-to-br from-green-500 to-emerald-600 opacity-0 group-hover:opacity-10 transition-all duration-500 rounded-2xl" />
-                
+                  
                 <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-all duration-300 shadow-lg group-hover:shadow-2xl relative z-10">
                   ⚡
-                </div>
-                
+                  </div>
+                  
                 <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:bg-gradient-to-r group-hover:from-gray-900 group-hover:to-gray-600 dark:group-hover:from-white dark:group-hover:to-gray-300 transition-all duration-300 relative z-10">
                   Backend Development
-                </h3>
+                    </h3>
                 
                 <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed text-sm relative z-10 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors duration-300">
                   Building robust server-side applications, APIs, and scalable backend solutions
@@ -1047,8 +1113,8 @@ const Home = () => {
                       {tech}
                     </motion.span>
                   ))}
-                </div>
-              </div>
+                    </div>
+                  </div>
             </motion.div>
 
             {/* API Testing Tools */}
@@ -1075,18 +1141,18 @@ const Home = () => {
                   Testing and debugging REST APIs with professional tools for quality assurance
                 </p>
                 
-                <div className="flex flex-wrap gap-2 relative z-10">
+                  <div className="flex flex-wrap gap-2 relative z-10">
                   {['Postman', 'Thunder Client'].map((tech, index) => (
-                    <motion.span
+                      <motion.span
                       key={index}
                       className="px-3 py-1.5 bg-white/80 dark:bg-gray-700/80 text-gray-700 dark:text-gray-300 rounded-xl text-sm font-medium border border-gray-200/50 dark:border-gray-600/50 backdrop-blur-sm group-hover:bg-white/90 dark:group-hover:bg-gray-700/90 transition-all duration-300"
-                      whileHover={{ scale: 1.05, y: -2 }}
-                      transition={{ duration: 0.2 }}
-                    >
+                        whileHover={{ scale: 1.05, y: -2 }}
+                        transition={{ duration: 0.2 }}
+                      >
                       {tech}
-                    </motion.span>
-                  ))}
-                </div>
+                      </motion.span>
+                    ))}
+                  </div>
               </div>
             </motion.div>
 
@@ -1126,8 +1192,8 @@ const Home = () => {
                     </motion.span>
                   ))}
                 </div>
-              </div>
-            </motion.div>
+                </div>
+              </motion.div>
 
             {/* DevOps & Tools */}
             <motion.div
@@ -1294,24 +1360,12 @@ const Home = () => {
             >
               <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200/50 dark:border-gray-600/50">
                 <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center text-white text-xl">
-                    📞
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900 dark:text-white">Call Me</h3>
-                    <p className="text-gray-600 dark:text-gray-400">+1 (555) 123-4567</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200/50 dark:border-gray-600/50">
-                <div className="flex items-center space-x-4">
                   <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center text-white text-xl">
                     ✉️
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 dark:text-white">Email Me</h3>
-                    <p className="text-gray-600 dark:text-gray-400">hello@yourname.com</p>
+                    <p className="text-gray-600 dark:text-gray-400">nikeshgamal24@gmail.com</p>
                   </div>
                 </div>
               </div>
@@ -1323,7 +1377,7 @@ const Home = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 dark:text-white">Location</h3>
-                    <p className="text-gray-600 dark:text-gray-400">San Francisco, CA</p>
+                    <p className="text-gray-600 dark:text-gray-400">Pokhara, Nepal</p>
                   </div>
                 </div>
               </div>
@@ -1331,34 +1385,26 @@ const Home = () => {
 
             {/* Contact Form */}
             <motion.form
+              onSubmit={handleContactSubmit}
               className="space-y-6"
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Full Name *
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                    placeholder="Your full name"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Phone Number
-                  </label>
-                  <input
-                    type="tel"
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                    placeholder="Your phone number"
-                  />
-                </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Full Name *
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  value={contactForm.name}
+                  onChange={handleContactInputChange}
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                  placeholder="Your full name"
+                  required
+                />
               </div>
 
               <div>
@@ -1367,6 +1413,9 @@ const Home = () => {
                 </label>
                 <input
                   type="email"
+                  name="email"
+                  value={contactForm.email}
+                  onChange={handleContactInputChange}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                   placeholder="your.email@example.com"
                   required
@@ -1379,6 +1428,9 @@ const Home = () => {
                 </label>
                 <input
                   type="text"
+                  name="subject"
+                  value={contactForm.subject}
+                  onChange={handleContactInputChange}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                   placeholder="What's this about?"
                   required
@@ -1391,6 +1443,9 @@ const Home = () => {
                 </label>
                 <textarea
                   rows={4}
+                  name="message"
+                  value={contactForm.message}
+                  onChange={handleContactInputChange}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none"
                   placeholder="Tell me about your project..."
                   required
@@ -1399,12 +1454,44 @@ const Home = () => {
 
               <motion.button
                 type="submit"
-                className="w-full px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
-                whileHover={{ scale: 1.02, y: -2 }}
-                whileTap={{ scale: 0.98 }}
+                disabled={isSubmitting}
+                className="w-full px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                whileHover={!isSubmitting ? { scale: 1.02, y: -2 } : {}}
+                whileTap={!isSubmitting ? { scale: 0.98 } : {}}
               >
-                Submit Now
+                {isSubmitting ? 'Sending...' : 'Submit Now'}
               </motion.button>
+
+              {/* Status Messages */}
+              {submitStatus && (
+                <motion.div
+                  className={`p-4 rounded-lg ${
+                    submitStatus === 'success' 
+                      ? 'bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800'
+                      : submitStatus === 'mailto'
+                      ? 'bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800'
+                      : 'bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800'
+                  }`}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                >
+                  {submitStatus === 'success' && (
+                    <p className="text-green-800 dark:text-green-200 text-sm">
+                      ✅ Message sent successfully! I'll get back to you soon.
+                    </p>
+                  )}
+                  {submitStatus === 'mailto' && (
+                    <p className="text-blue-800 dark:text-blue-200 text-sm">
+                      📧 Opening your email client to send a message directly.
+                    </p>
+                  )}
+                  {submitStatus === 'error' && (
+                    <p className="text-red-800 dark:text-red-200 text-sm">
+                      ❌ Something went wrong. Please try again or use the email link above.
+                    </p>
+                  )}
+                </motion.div>
+              )}
             </motion.form>
           </div>
         </div>

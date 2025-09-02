@@ -584,8 +584,8 @@ const About = () => {
               <Link
                 to="/contact"
                 className="btn-primary text-lg px-8 py-3 inline-block"
-              >
-                Get in Touch
+            >
+              Get in Touch
               </Link>
             </motion.div>
           </motion.section>

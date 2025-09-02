@@ -77,9 +77,26 @@ const Contact = () => {
           import.meta.env.VITE_EMAILJS_TEMPLATE_ID && 
           import.meta.env.VITE_EMAILJS_PUBLIC_KEY) {
         
-        // EmailJS implementation would go here
-        // For now, simulate success
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        // Import EmailJS dynamically
+        const emailjs = await import('@emailjs/browser');
+        
+        // Initialize EmailJS
+        emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
+        
+        // Send email using EmailJS
+        const result = await emailjs.send(
+          import.meta.env.VITE_EMAILJS_SERVICE_ID,
+          import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+          {
+            from_name: formData.name,
+            from_email: formData.email,
+            message: formData.message,
+            name: formData.name,
+            email: formData.email
+          }
+        );
+        
+        console.log('Email sent successfully:', result);
         setSubmitStatus('success');
         setFormData({ name: '', email: '', message: '' });
       } else {
@@ -256,19 +273,7 @@ const Contact = () => {
                   </motion.div>
                 )}
 
-                {/* EmailJS Configuration Note */}
-                {!import.meta.env.VITE_EMAILJS_SERVICE_ID && (
-                  <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                      💡 <strong>Note:</strong> To enable the contact form, add your EmailJS credentials to the environment variables:
-                      <code className="block mt-2 p-2 bg-gray-100 dark:bg-gray-600 rounded text-xs">
-                        VITE_EMAILJS_SERVICE_ID=your-service-id<br/>
-                        VITE_EMAILJS_TEMPLATE_ID=your-template-id<br/>
-                        VITE_EMAILJS_PUBLIC_KEY=your-public-key
-                      </code>
-                    </p>
-                  </div>
-                )}
+
               </div>
             </motion.div>
 
